@@ -3,19 +3,18 @@ from socket import *
 # In order to terminate the program
 import sys
 
-def webServer(port=13331):
+def webServer(port = 13331):
     serverSocket = socket(AF_INET, SOCK_STREAM)
     # Prepare a server socket
     serverSocket.bind(("", port))
     serverSocket.listen(1)
-
     while True:
         # Establish the connection
-        print ("Ready to serve...")
+        # print ("Ready to serve...")
         connectionSocket, addr = serverSocket.accept()
         try:
             try:
-                message = connectionSocket.recv()
+                message = connectionSocket.recv(1024)
                 filename = message.split()[1]
                 f = open(filename[1:])
                 outputdata = f.read()
@@ -34,10 +33,8 @@ def webServer(port=13331):
                 connectionSocket.close()
         except (ConnectionResetError, BrokenPipeError):
             pass
-
     serverSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
     webServer(13331)
-
