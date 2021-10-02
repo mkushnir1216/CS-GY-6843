@@ -4,7 +4,7 @@ from socket import *
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
     msg = "\r\n My message"
-    endMsg = "\r\n.\r\n"
+    endmsg = "\r\n.\r\n"
 
     # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
 
@@ -52,7 +52,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     clientSocket.send(msg.encode())
 
     # Message ends with a single period.
-    clientSocket.send(endMsg.encode())
+    clientSocket.send(endmsg.encode())
     recv5 = clientSocket.recv(1024).decode()
     #print(recv5)
     if recv5[:3] != '250':
