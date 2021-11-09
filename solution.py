@@ -5,7 +5,6 @@ import sys
 import struct
 import time
 import select
-import binascii
 
 ICMP_ECHO_REQUEST = 8
 
@@ -54,8 +53,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         if type != 8 and packetID == ID:
             bytesInDouble = struct.calcsize("d")
             timeSent = struct.unpack("d", recPacket[28:28 + bytesInDouble])[0]
-            rtt = timeReceived - timeSent
-            return rtt
+            return timeReceived - timeSent
 
         timeLeft = timeLeft - howLongInSelect
         if timeLeft <= 0:
