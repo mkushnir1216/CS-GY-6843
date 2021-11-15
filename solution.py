@@ -1,5 +1,5 @@
 from socket import *
-from statistics import stdev
+from statistics import *
 import os
 import sys
 import struct
@@ -118,7 +118,7 @@ def ping(host, timeout=1):
         delayArray.append(delay)
     packet_min = (min(delayArray)) * 1000
     packet_max = (max(delayArray)) * 1000
-    packet_avg = ((sum(delayArray)) / 4) * 1000
+    packet_avg = (mean(delayArray)) * 1000
     stdev_var = (stdev(delayArray)) * 1000
     vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
     return vars
