@@ -75,7 +75,7 @@ def get_route(hostname):
             # Fill in start
             icmp = socket.getprotobyname("icmp")
             # Make a raw socket named mySocket
-            mySocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, icmp)
+            mySocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
             # Fill in end
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
             mySocket.settimeout(TIMEOUT)
@@ -116,7 +116,7 @@ def get_route(hostname):
                     # Fill in end
                 except herror:   # If the host does not provide a hostname
                     # Fill in start
-                    tracelist1.append("Host does not provide a hostname.")
+                    tracelist1.append("hostname not returnable")
                     # Fill in end
                 if types == 11:
                     bytes = struct.calcsize("d")
@@ -148,9 +148,10 @@ def get_route(hostname):
                 else:
                     # Fill in start
                     # If there is an exception/error to your if statements, you should append that to your list here
-                    tracelist1.append("Error.")
+                    tracelist1.append("error")
                     # Fill in end
                 break
             finally:
                 mySocket.close()
     return tracelist2
+
